@@ -7,6 +7,7 @@ window.onload = function () {
                 participantsAmount: '1',
                 savedActivities: [],
                 storagedActivities: [],
+                activityType: ''
             }
         },
         delimiters: ['{{', '}}'],
@@ -14,20 +15,12 @@ window.onload = function () {
         watch: {},
         methods: {
             findActivity: function (type) {
-                if (type == '' || type == undefined) {
-                    type = this.activities.type;
-                    fetch(`https://www.boredapi.com/api/activity?participants=${this.participantsAmount}&type=${type}`)
-                        .then(response => response.json())
-                        .then(response => {
-                            this.activities = response;
-                        })
-                } else {
-                    fetch(`https://www.boredapi.com/api/activity?participants=${this.participantsAmount}&type=${type}`)
-                        .then(response => response.json())
-                        .then(response => {
-                            this.activities = response;
-                        })
-                }
+                fetch(`https://www.boredapi.com/api/activity?participants=${this.participantsAmount}&type=${this.activityType}`)
+                    .then(response => response.json())
+                    .then(response => {
+                        this.activities = response;
+                        this.activityType = response.type;
+                    })
             },
             saveActivity: function () {
                 this.savedActivities.push(this.activities);

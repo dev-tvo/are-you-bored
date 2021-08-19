@@ -29,7 +29,8 @@
                 <div class="activity">
                     <div class="activity-main">
                         <p>You can try:</p>
-                        <div class="actual-activity">
+                        <div class="actual-activity" :class="{ error: activities.error }">
+                            {{ activities.error }}
                             {{ activities.activity }}
                         </div>
                     </div>
@@ -42,7 +43,8 @@
 
                     <fieldset>
                         <label for="type">Type</label>
-                        <select name="type" id="type" v-model="activities.type">
+                        <select name="type" id="type" v-model="activityType">
+                            <option value="" disabled>Select type</option>
                             <option value="education">Education</option>
                             <option value="recreational">Recreational</option>
                             <option value="social">Social</option>
