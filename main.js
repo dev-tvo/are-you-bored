@@ -1,5 +1,5 @@
 window.onload = function () {
-    var blogApp = {
+    var boredApp = {
         data: function () {
             return {
                 activities: [],
@@ -40,5 +40,5 @@ window.onload = function () {
             this.fetchSavedActivities();
         }
     };
-    window.vue_results = Vue.createApp(blogApp).mount('#bored');
+    window.vue_results = Vue.createApp(boredApp).mount('#bored');
 }
