@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <script src="vue/vue.global.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="bored">
+        <div class="activity-wrapper">
+            <div class="tabs">
+                <div class="tab" v-on:click="tab = 'activities'" :class="{ active: tab == 'activities' }">
+                    Activities
+                </div>
+                <div class="tab" v-on:click="tab = 'saved'; fetchSavedActivities()" :class="{ active: tab == 'saved' }">
+                    Saved activities
+                </div>
+            </div>
+            <div class="activity-inner" v-if="tab == 'activities'">
+                <div class="activity">
+                    <div class="activity-main">
+                        <p>You can try:</p>
+                        <div class="actual-activity">
+                            {{ activities.activity }}
+                        </div>
+                    </div>
+                    <div class="save-activity">
+                        <button v-on:click="saveActivity()">Save activity</button>
+                    </div>
+                </div>
+                <div class="activity-details">
+                    <p>Activity details:</p>
+
+                    <fieldset>
+                        <label for="type">Type</label>
+                        <select name="type" id="type" v-model="activities.type">
+                            <option value="education">Education</option>
+                            <option value="recreational">Recreational</option>
+                            <option value="social">Social</option>
+                            <option value="diy">Diy</option>
+                            <option value="charity">Charity</option>
+                            <option value="cooking">Cooking</option>
+                            <option value="relaxation">Relaxation</option>
+                            <option value="music">Music</option>
+                            <option value="busywork">Busywork</option>
+                        </select>
+                    </fieldset>
+
+                    <fieldset>
+                        <label for="participants">Participants</label>
+                        <input id="type" type="number" min="1" class="participants-amount" v-model="participantsAmount">
+                    </fieldset>
+
+                    <div class="find-activity">
+                        <button v-on:click="findActivity()">Find activity to do</button>
+                    </div>
+                </div>
+            </div>
+            <div class="saved-inner" v-else>
+                <p>Here are your saved activities:</p>
+                <div v-for="activity in storagedActivities" class="saved-activity">
+                    <span class="type">{{ activity.type }}</span>
+                    <div>{{ activity.activity }}</div>
+                </div>
+                <div class="clear-saved-activities">
+                    <button v-on:click="clearSavedActivities()">Clear list</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="main.js"></script>
+
+</html>
